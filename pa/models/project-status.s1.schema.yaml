@@ -1,0 +1,26 @@
+title: project-status
+x-mappedTo: projectstatus
+type: object
+x-idempotence: true
+description: Project Status
+properties:
+  key:
+    type: string
+    description: Record Key
+    readOnly: true
+    x-mappedTo: RECORDNO
+  id:
+    type: string
+    description: Record Id
+    readOnly: true
+    x-mappedTo: NAME
+  name:
+    type: string
+    description: Record Id
+    x-mappedTo: NAME
+  audit:
+    $ref: ../../common/models/audit.s1.schema.yaml
+  href:
+    type: string
+    example: /objects/project-status/1
+    readOnly: true

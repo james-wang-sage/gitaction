@@ -6,10 +6,10 @@ info:
   contact:
     email: tim.miller@sage.com
     name: Tim Miller
-# servers:
-#   - url: 'http://localhost:3000'
 tags:
   - name: project
+servers:
+  - url: 'http://localhost:3000'
 paths:
   '/objects/project/{key}':
     parameters:
@@ -29,6 +29,16 @@ paths:
           description: OK
           content:
             application/json:
+              schema:
+                type: object
+                properties:
+                  'ia::result':
+                    $ref: '#/components/schemas/project'
+                  'ia::meta':
+                    $ref: ../../common/models/metadata.schema.yaml
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400error'
       operationId: get-objects-project-key
     delete:
       summary: Delete project
@@ -39,6 +49,8 @@ paths:
       responses:
         '204':
           description: No Content
+        '400':
+          $ref: '#/components/responses/400error'
     patch:
       summary: Update project
       operationId: put-objects-project-key
@@ -48,6 +60,8 @@ paths:
       responses:
         '200':
           description: OK
+        '400':
+          $ref: '#/components/responses/400error'
       requestBody:
         content:
           application/json:
@@ -174,6 +188,187 @@ paths:
                       id: jrenzel
                     billTo:
                       id: anjali.israni
+  /objects/project:
+    get:
+      summary: Collection of projects
+      tags:
+        - project
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  'ia::result':
+                    type: array
+                    items:
+                      $ref: ../../common/models/object-reference.schema.yaml
+                  'ia::meta':
+                    $ref: ../../common/models/metadata-pages.schema.yaml
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400error'
+      operationId: get-objects-project
+      description: Collection of project keys and reference links to get project details
+    post:
+      summary: Create project
+      tags:
+        - project
+      operationId: post-v1-objects-project
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  'ia::result':
+                    $ref: ../../common/models/object-reference.schema.yaml
+                  'ia::meta':
+                    $ref: ../../common/models/metadata.schema.yaml
+              examples: {}
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          $ref: '#/components/responses/400error'
+      description: Create a new project
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/project'
+                - $ref: '#/components/schemas/projectRequiredProperties'
+            examples:
+              example-1:
+                value:
+                  key: string
+                  id: string
+                  name: string
+                  description: string
+                  currency: string
+                  category: string
+                  projectStatus:
+                    key: '0'
+                    id: string
+                    name: string
+                  status: active
+                  startDate: string
+                  endDate: string
+                  amounts:
+                    budgetAmount: 0
+                    contractAmount: 0
+                    actualAmount: 0
+                  durations:
+                    budgetDuration: 0
+                    estimatedDuration: 0
+                    actualDuration: 0
+                    approvedDuration: 0
+                    remainingDuration: 0
+                  percentComplete: 0
+                  observedPercentComplete: 0
+                  billingType: string
+                  salesOrderId: string
+                  purchaseOrderId: string
+                  purchaseOrderAmount: string
+                  purchaseQuoteId: string
+                  salesforceKey: string
+                  parent:
+                    key: string
+                    id: string
+                    name: string
+                  isInvoicedWithParent: true
+                  customer:
+                    key: 0
+                    id: string
+                    name: string
+                  salesContact:
+                    key: string
+                    id: string
+                    name: string
+                    href: string
+                  manager:
+                    key: string
+                    id: string
+                    name: string
+                    href: string
+                  department:
+                    key: 0
+                    id: string
+                    name: string
+                  location:
+                    key: 0
+                    id: 0
+                    name: string
+                  referenceId: string
+                  budgetedCost: 0
+                  class:
+                    id: string
+                    key: 0
+                    name: string
+                  userRestrictions: string
+                  isEmployeeExpenseBillable: true
+                  isAccountsPayableOrPurchaseOrderBillable: string
+                  billingRate: 0
+                  billingPricing: string
+                  expenseRate: string
+                  expensePricing: string
+                  rateForAPOrPurchasing: 0
+                  pricingOptionForAccountsPayableOrPurchaseOrder: string
+                  contacts:
+                    primary:
+                      key: string
+                      id: string
+                      href: string
+                    shipTo:
+                      key: string
+                      id: string
+                      href: string
+                    billTo:
+                      key: string
+                      id: string
+                      href: string
+                  invoiceMessage: string
+                  invoiceCurrency: string
+                  billingAmountOverMax: string
+                  isExpenseExcluded: true
+                  attachmentId: string
+                  audit:
+                    createdDateTime: '2014-01-08T11:28:12Z'
+                    modifiedDateTime: '2014-01-08T11:28:12Z'
+                    createdBy: 1
+                    modifiedBy: 95
+                  root:
+                    key: 0
+                    id: string
+                    name: string
+              working example:
+                value:
+                  id: Test 1
+                  name: Test Project
+                  category: Contract
+                  description: Description for test project
+          application/xml:
+            schema:
+              type: object
+              properties: {}
+          multipart/form-data:
+            schema:
+              type: object
+              properties: {}
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json
 components:
   schemas:
     project:
@@ -190,12 +385,4 @@ components:
         application/json:
           schema:
             $ref: ../../common/models/error-response.schema.yaml
-  parameters:
-    jobId:
-      name: jobId
-      in: path
-      schema:
-        type: string
-        pattern: '^[A-Za-z0-9]'
-      required: true
 
