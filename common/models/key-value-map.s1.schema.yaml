@@ -14,12 +14,13 @@ properties:
     default: user
   value:
     type:
-      - string
-      - number
-      - integer
-      - boolean
-      - object
-      - array
+      oneOf:
+        - string
+        - number
+        - integer
+        - boolean
+        - object
+        - array
     description: Value to store
   href:
     type: string
