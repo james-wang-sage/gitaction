@@ -60,10 +60,10 @@ except:
   "common/models/metadata.schema.yaml":
     - ia-x-mappedto
     - ia-x-mappedto-root
-  "common/models/objectmodel.schema.yaml":
+  "common/models/object-model.schema.yaml":
     - ia-x-mappedto
     - ia-x-mappedto-root
-  "common/models/objectref.schema.yaml":
+  "common/models/object-reference.schema.yaml":
     - ia-x-mappedto
     - ia-x-mappedto-root
   "common/models/metadatapages.v1.yaml":
