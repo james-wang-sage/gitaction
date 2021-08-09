@@ -1,0 +1,347 @@
+openapi: 3.0.0
+info:
+  title: Services
+  description: Services API OpenAPI Spec
+  version: '1.0'
+  contact:
+    email: anjali.israni@sage.com
+    name: Anjali Israni
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /services/query:
+    post:
+      summary: Query
+      operationId: post-services-query
+      description: Query an object for filtered data
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  'ia::result':
+                    type: array
+                    description: Fields requested in query
+                    items:
+                      type: object
+                      description: ''
+                      properties:
+                        fieldName:
+                          type: string
+                  'ia::meta':
+                    $ref: ../../common/models/metadata-pages.schema.yaml
+              examples:
+                Response - Query vendor:
+                  value:
+                    'ia::result':
+                      - id: Vend-00002
+                        name: Test vendor
+                        status: active
+                        href: /objects/vendor/85
+                      - id: VEND-00010
+                        name: Design Works
+                        status: active
+                        href: /objects/vendor/111
+                    'ia::meta':
+                      totalCount: 2
+                      start: 1
+                      pageSize: 100
+                Response - Query user-view:
+                  value:
+                    'ia::result':
+                      - name: vendorTest1
+                        object: vendor
+                        query:
+                          object: vendor
+                          fields:
+                            - id
+                            - name
+                            - status
+                            - href
+                          filters:
+                            '1':
+                              $eq:
+                                status: active
+                            '2':
+                              $eq:
+                                billingType: openItem
+                          filterExpression: 1 and 2
+                          orderBy:
+                            id: asc
+                      - name: vendorTest2
+                        object: vendor
+                        query:
+                          object: vendor
+                          fields:
+                            - id
+                            - name
+                            - status
+                            - href
+                          filters:
+                            '1':
+                              $eq:
+                                status: active
+                            '2':
+                              $eq:
+                                billingType: balanceForward
+                          filterExpression: 1 and 2
+                          orderBy:
+                            id: asc
+                    'ia::meta':
+                      totalCount: 2
+                      start: 1
+                      pageSize: 100
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          $ref: '#/components/responses/400error'
+      tags:
+        - services
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/query.schema.yaml
+            examples:
+              Query vendor:
+                value:
+                  object: vendor
+                  fields:
+                    - id
+                    - name
+                    - status
+                    - href
+                  filters:
+                    '1':
+                      $eq:
+                        status: active
+                    '2':
+                      $eq:
+                        billingType: openItem
+                  filterExpression: 1 and 2
+                  orderBy:
+                    id: asc
+              Query user-view:
+                value:
+                  object: user-view
+                  fields:
+                    - name
+                    - object
+                    - query
+                  filters:
+                    - $eq:
+                        object: vendor
+  /services/view:
+    post:
+      summary: View
+      operationId: post-services-view
+      description: Query a view
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  'ia::result':
+                    type: array
+                    description: Fields requested in query
+                    items:
+                      type: object
+                      description: ''
+                      properties:
+                        fieldName:
+                          type: string
+                  'ia::meta':
+                    $ref: ../../common/models/metadata-pages.schema.yaml
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '400':
+          $ref: '#/components/responses/400error'
+      tags:
+        - services
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: ../models/view.schema.yaml
+            examples:
+              User Query:
+                value:
+                  key: '540'
+                  viewType: user
+                  filterParameters:
+                    asOfDate: '2020-12-01'
+                    caseSensitiveComparison: false
+              System Query:
+                value:
+                  key: 'vendor::getAll'
+                  viewType: system
+                  orderBy:
+                    name: asc
+  /services/model:
+    get:
+      summary: Get Object Model Definition
+      tags:
+        - services
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  'ia::result':
+                    $ref: ../../common/models/object-model.schema.yaml
+                  'ia::meta':
+                    $ref: ../../common/models/metadata.schema.yaml
+        '400':
+          $ref: '#/components/responses/400error'
+      operationId: get-servcies-model
+      description: List all the fields and relationships for an object
+      parameters:
+        - $ref: '#/components/parameters/name'
+  /services/key-value-map:
+    get:
+      summary: Get collection of key value maps
+      description: Returns a collection of key value maps
+      tags:
+        - services
+      operationId: get-services-key-value-map
+      parameters:
+        - $ref: '#/components/parameters/type'
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                title: key-value-map Collection
+                properties:
+                  'ia::result':
+                    type: array
+                    items:
+                      $ref: ../../common/models/object-reference.schema.yaml
+                  'ia::meta':
+                    $ref: ../../common/models/metadata-pages.schema.yaml
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400error'
+    post:
+      summary: Create key value map
+      description: Create a new key value map
+      tags:
+        - services
+      operationId: post-services-key-value-map
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: ../models/key-value-map.s1.schema.yaml
+            examples:
+              example-1:
+                value:
+                  key: key1
+                  type: company
+                  value:
+                    text-color: blue
+                    background-color: black
+                    font: Ariel
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                title: New key-value-map
+                properties:
+                  'ia::result':
+                    $ref: ../../common/models/object-reference.schema.yaml
+                  'ia::meta':
+                    $ref: ../../common/models/metadata.schema.yaml
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400error'
+  '/services/key-value-map/{key}':
+    parameters:
+      - name: key
+        description: Key
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get key-value-map
+      description: Get data for key
+      tags:
+        - services
+      operationId: get-services-key-value-map-key
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                title: key details
+                properties:
+                  'ia::result':
+                    $ref: ../models/key-value-map.s1.schema.yaml
+                  'ia::meta':
+                    $ref: ../../common/models/metadata.schema.yaml
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400error'
+    delete:
+      summary: Delete key
+      description: Delete a key
+      tags:
+        - services
+      operationId: delete-services-key-value-map-key
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/400error'
+components:
+  parameters:
+    name:
+      name: name
+      in: query
+      schema:
+        type: string
+      required: true
+      description: Model name
+    type:
+      name: type
+      in: query
+      schema:
+        type: string
+        enum:
+          - user
+          - company
+        default: user
+      required: false
+      description: Key type
+  responses:
+    400error:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../../common/models/error-response.schema.yaml
+tags:
+  - name: services

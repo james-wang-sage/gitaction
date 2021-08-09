@@ -1,0 +1,17 @@
+title: classref
+type: object
+x-object: class
+properties:
+  id:
+    type: string
+    description: Class ID
+    x-mappedTo: CLASSID
+  key:
+    type: integer
+    description: Class Key
+    x-mappedTo: CLASSDIMKEY
+  name:
+    type: string
+    description: Class Name
+    readOnly: true
+    x-mappedTo: CLASSNAME

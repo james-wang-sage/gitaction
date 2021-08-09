@@ -1,0 +1,11 @@
+type: string
+enum:
+  - active
+  - activeNonPosting
+  - inactive
+x-mappedToValues:
+  - active
+  - active non-posting
+  - inactive
+description: Status of object, Active/Active-Non-Posting/Inactive
+x-mappedTo: STATUS

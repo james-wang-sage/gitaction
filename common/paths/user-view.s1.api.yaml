@@ -1,0 +1,209 @@
+openapi: 3.0.0
+info:
+  title: user-view
+  description: user-view API
+  version: '1.0'
+  contact:
+    email: anjali.israni@sage.com
+    name: Anjali Israni
+tags:
+  - name: user-view
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/objects/user-view/{key}':
+    parameters:
+      - schema:
+          type: string
+          example: '262'
+        name: key
+        in: path
+        required: true
+        description: view Key
+    get:
+      summary: Get user view
+      description: Get complete details for a user view
+      tags:
+        - user-view
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  'ia::result':
+                    $ref: '#/components/schemas/userView'
+                  'ia::meta':
+                    $ref: ../../common/models/metadata.schema.yaml
+              examples:
+                Example-1:
+                  value:
+                    'ia::result':
+                      key: '262'
+                      id: '262'
+                      name: vendorTest3
+                      description: ' testing vendor query'
+                      category: null
+                      owner:
+                        key: '1'
+                        id: Admin
+                        href: /objects/user/1
+                      object: vendor
+                      query:
+                        object: vendor
+                        fields:
+                          - id
+                          - name
+                          - status
+                          - href
+                        filters:
+                          '1':
+                            $eq:
+                              status: active
+                          '2':
+                            $eq:
+                              billingType: openItem
+                        filterExpression: 1 and 2
+                        orderBy:
+                          id: asc
+                      status: active
+                      viewVersion: '0'
+                      audit:
+                        createdDateTime: null
+                        modifiedDateTime: '2021-05-17T17:41:55Z'
+                        createdBy: null
+                        modifiedBy: 1
+                      href: /objects/user-view/262
+                    'ia::meta':
+                      totalCount: 1
+        '400':
+          $ref: '#/components/responses/400error'
+      operationId: get-objects-user-view-key
+    patch:
+      summary: Update view
+      operationId: patch-objects-user-view-key
+      description: Update details of existing user view
+      tags:
+        - user-view
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/400error'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/userView'
+                - type: object
+                  properties:
+                    id:
+                      readOnly: true
+    delete:
+      summary: Delete user view
+      description: Delete a user view
+      tags:
+        - user-view
+      operationId: delete-objects-user-view-key
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/400error'
+  /objects/user-view:
+    get:
+      summary: Collection of user views
+      tags:
+        - user-view
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  'ia::result':
+                    type: array
+                    items:
+                      $ref: ../../common/models/object-reference.schema.yaml
+                  'ia::meta':
+                    $ref: ../../common/models/metadata-pages.schema.yaml
+        '400':
+          $ref: '#/components/responses/400error'
+      operationId: get-objects-user-view
+      description: Collection of view keys and reference links to get view details
+    post:
+      summary: Create user view
+      tags:
+        - user-view
+      operationId: post-objects-user-view
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  'ia::result':
+                    $ref: ../../common/models/object-reference.schema.yaml
+                  'ia::meta':
+                    $ref: ../../common/models/metadata.schema.yaml
+        '400':
+          $ref: '#/components/responses/400error'
+      description: Create a new  user view
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/userView'
+                - $ref: '#/components/schemas/userViewRequiredProperties'
+            examples:
+              User view for vendor:
+                value:
+                  name: vendorTest5
+                  query:
+                    object: vendor
+                    fields:
+                      - id
+                      - name
+                      - status
+                      - href
+                    filters:
+                      '1':
+                        $eq:
+                          status: inactive
+                      '2':
+                        $eq:
+                          billingType: balanceForward
+                    filterExpression: 1 and 2
+                    orderBy:
+                      id: desc
+      parameters:
+        - schema:
+            type: string
+          in: header
+          name: Content-Type
+          description: application/json
+components:
+  schemas:
+    userView:
+      $ref: ../models/user-view.s1.schema.yaml
+    userViewRequiredProperties:
+      type: object
+      required:
+        - name
+  responses:
+    400error:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../../common/models/error-response.schema.yaml

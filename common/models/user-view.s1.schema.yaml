@@ -1,0 +1,79 @@
+title: user-view
+x-mappedTo: filterview
+type: object
+x-idempotence: true
+description: Filter View.
+properties:
+  key:
+    type: string
+    description: Record Key
+    x-mappedTo: RECORDNO
+    readOnly: true
+  id:
+    type: string
+    description: Record Id
+    x-mappedTo: RECORDNO
+    readOnly: true
+  name:
+    type: string
+    description: View name
+    x-mappedTo: NAME
+  href:
+    type: string
+    readOnly: true
+  status:
+    $ref: ../../common/models/status.s1.schema.yaml
+  description:
+    type: string
+    description: Description
+    x-mappedTo: DESCRIPTION
+  object:
+    type: string
+    description: Object 
+    x-mappedTo: OBJECT
+  category:
+    type: string
+    description: View category
+    x-mappedTo: CATEGORY
+    nullable: true
+  viewVersion:
+    type: string
+    description: View Version
+    x-mappedTo: APIVERSION
+  query:
+    allOf:
+      - $ref: ../../common/models/query.schema.yaml
+      - description: Query Parameters
+      - x-mappedToType: blob
+      - x-mappedTo: QUERYPARAMS
+      - type: object
+        properties:
+          textFormat:
+            type: array
+            description: Field added for UI (temporary fix for R3)
+            items:
+              type: object
+          frozenColumns:
+            type: array
+            description: Field added for UI (temporary fix for R3)
+            items:
+              type: object
+    type: object
+  owner:
+    type: object
+    x-object: user
+    x-mappedTo: userinfo
+    title: owner
+    properties:
+      key:
+        type: string
+        x-mappedTo: OWNER
+        readOnly: true
+      id:
+        type: string
+        x-mappedTo: OWNERID
+      href:
+        type: string
+        readOnly: true
+  audit:
+    $ref: ../../common/models/audit.s1.schema.yaml

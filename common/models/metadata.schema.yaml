@@ -1,0 +1,8 @@
+title: metadata
+description: Meta data for response
+type: object
+properties:
+  totalCount:
+    type: integer
+    description: Total Count
+    readOnly: true

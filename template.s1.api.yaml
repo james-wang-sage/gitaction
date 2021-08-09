@@ -1,0 +1,151 @@
+openapi: 3.0.0
+info:
+  title: <object>
+  description: <object> API
+  version: '1.0'
+  contact:
+    name: Anjali Israni
+    email: anjali.israni@sage.com
+tags:
+  - name: <object>
+    description: <object> description -- what it's for and where it's used.
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  /objects/<object>:
+    get:
+      summary: Get collection of <object>s
+      description: Returns a collection of <object> keys and reference links to get <object> details
+      tags:
+        - <object>
+      operationId: get-objects-<object>
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                title: <object> Collection
+                properties:
+                  'ia::result':
+                    type: array
+                    items:
+                      $ref: ../../common/models/object-reference.schema.yaml
+                  'ia::meta':
+                    $ref: ../../common/models/metadata-pages.schema.yaml
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400error'
+    post:
+      summary: Create <object>
+      description: Create a new <object>
+      tags:
+        - <object>
+      operationId: post-v1-objects-<object>
+      requestBody:
+        description: ''
+        required: true
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: '#/components/schemas/<object>'
+                - $ref: '#/components/schemas/<object>RequiredProperties'
+            examples: {}
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                type: object
+                title: New <object>
+                properties:
+                  'ia::result':
+                    $ref: ../../common/models/object-reference.schema.yaml
+                  'ia::meta':
+                    $ref: ../../common/models/metadata.schema.yaml
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400error'
+
+  '/objects/<object>/{key}':
+    parameters:
+      - name: key
+        description: <object> Key
+        in: path
+        required: true
+        schema:
+          type: string
+    get:
+      summary: Get <object>
+      description: Get complete details for a particular <object>
+      tags:
+        - <object>
+      operationId: get-objects-<object>-key
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                title: <object> details
+                properties:
+                  'ia::result':
+                    $ref: '#/components/schemas/<object>'
+                  'ia::meta':
+                    $ref: ../../common/models/metadata.schema.yaml
+              examples: {}
+        '400':
+          $ref: '#/components/responses/400error'
+    patch:
+      summary: Update <object>
+      description: Update details of existing <object>
+      tags:
+        - <object>
+      operationId: patch-objects-<object>-key
+      requestBody:
+        content:
+          application/json:
+            schema:
+              allOf:
+                - $ref: ../models/<object>.s1.schema.yaml
+                - type: object
+                  properties:
+                    id:
+                      readOnly: true
+      responses:
+        '200':
+          description: OK
+        '400':
+          $ref: '#/components/responses/400error'
+    delete:
+      summary: Delete <object>
+      description: Delete a <object>
+      tags:
+        - <object>
+      operationId: delete-objects-<object>-key
+      responses:
+        '204':
+          description: No Content
+        '400':
+          $ref: '#/components/responses/400error'
+  '/services':
+    $ref: ../../common/paths/services.api.yaml
+components:
+  schemas:
+    <object>:
+      $ref: ../models/<object>.s1.schema.yaml
+    <object>RequiredProperties:
+      type: object
+      required:
+        - id
+  responses:
+    400error:
+      description: Bad Request
+      content:
+        application/json:
+          schema:
+            $ref: ../../common/models/error-response.schema.yaml

@@ -1,0 +1,167 @@
+type: object
+title: dimensions
+properties:
+  location:
+    title: location
+    type: object
+    x-object: location
+    properties:
+      key:
+        type: integer
+        description: Location Key
+        x-mappedTo: LOCATIONKEY
+      id:
+        type: integer
+        description: Location
+        x-mappedTo: LOCATION
+      name:
+        type: string
+        description: Location Name
+        readOnly: true
+        x-mappedTo: LOCATIONNAME
+  department:
+    title: department
+    type: object
+    x-object: department
+    properties:
+      key:
+        type: integer
+        description: Department Key
+        x-mappedTo: DEPARTMENTKEY
+      id:
+        type: string
+        description: Department
+        x-mappedTo: DEPARTMENT
+      name:
+        type: string
+        description: Department Name
+        readOnly: true
+        x-mappedTo: DEPARTMENTTITLE
+  employee:
+    title: employee
+    type: object
+    x-object: employee
+    properties:
+      id:
+        type: string
+        description: Employee ID
+        x-mappedTo: EMPLOYEEID
+      key:
+        type: integer
+        description: Employee Key
+        x-mappedTo: EMPLOYEEDIMKEY
+      name:
+        type: string
+        description: Employee Name
+        readOnly: true
+        x-mappedTo: EMPLOYEENAME
+  project:
+    title: project
+    type: object
+    x-object: project
+    properties:
+      key:
+        type: integer
+        description: Project Key
+        x-mappedTo: PROJECTDIMKEY
+      id:
+        type: string
+        description: Project ID
+        x-mappedTo: PROJECTID
+      name:
+        type: string
+        description: Project Name
+        readOnly: true
+        x-mappedTo: PROJECTNAME
+  customer:
+    title: customer
+    type: object
+    x-object: customer
+    properties:
+      key:
+        type: integer
+        description: Customer Key
+        x-mappedTo: CUSTOMERDIMKEY
+      id:
+        type: string
+        description: Customer ID
+        x-mappedTo: CUSTOMERID
+      name:
+        type: string
+        description: Customer Name
+        readOnly: true
+        x-mappedTo: CUSTOMERNAME
+  vendor:
+    title: vendor
+    type: object
+    x-object: vendor
+    properties:
+      id:
+        type: string
+        description: Vendor ID
+        x-mappedTo: VENDORID
+      key:
+        type: integer
+        description: Vendor Key
+        x-mappedTo: VENDORDIMKEY
+      name:
+        type: string
+        description: Vendor Name
+        readOnly: true
+        x-mappedTo: VENDORNAME
+  item:
+    title: item
+    type: object
+    x-object: item
+    properties:
+      id:
+        type: string
+        description: Item ID
+        x-mappedTo: ITEMID
+      key:
+        type: integer
+        description: Item Key
+        x-mappedTo: ITEMDIMKEY
+      name:
+        type: string
+        description: Item Name
+        readOnly: true
+        x-mappedTo: ITEMNAME
+  warehouse:
+    title: warehouse
+    type: object
+    x-object: warehouse
+    properties:
+      id:
+        type: string
+        description: Warehouse ID
+        x-mappedTo: WAREHOUSEID
+      key:
+        type: integer
+        description: Warehouse Key
+        x-mappedTo: WAREHOUSEDIMKEY
+      name:
+        type: string
+        description: Warehouse Name
+        x-mappedTo: WAREHOUSENAME
+        readOnly: true
+  class:
+    title: class
+    type: object
+    x-object: class
+    properties:
+      id:
+        type: string
+        description: Class ID
+        x-mappedTo: CLASSID
+      key:
+        type: integer
+        description: Class Key
+        x-mappedTo: CLASSDIMKEY
+      name:
+        type: string
+        description: Class Name
+        readOnly: true
+        x-mappedTo: CLASSNAME
+x-tags:
+  - reference

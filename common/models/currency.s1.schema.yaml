@@ -1,0 +1,26 @@
+title: currency
+type: object
+properties:
+  exchangeRateDate:
+    type: string
+    format: date
+    example: '2014-01-08'
+    description: Exchange rate date
+    x-mappedTo: EXCH_RATE_DATE
+  exchangeRateType:
+    type: integer
+    description: Exchange rate type
+    x-mappedTo: EXCH_RATE_TYPE_ID
+  exchangeRate:
+    type: number
+    description: Exchange rate
+    x-mappedTo: EXCHANGE_RATE
+  baseCurrency:
+    type: string
+    description: Base currency
+    x-mappedTo: BASECURR
+  txnCurrency:
+    type: string
+    description: Transaction currency
+    x-mappedTo: CURRENCY
+

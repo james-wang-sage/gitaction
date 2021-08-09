@@ -1,12 +1,14 @@
-extends: spectral:oas
+extends:
+  - spectral:oas
 
 documentationUrl: https://intacct.atlassian.net/wiki/spaces/~397816204/pages/1369407790/YAML+Schema+for+NextGen+API+Objects
 
-functions: ["true"]
+functions:
+  - readOnlyTrue
 
 rules:
   ia-x-mappedto:
-    description: "Primitive property should have x-mappedTo field."
+    description: Primitive property should have x-mappedTo field.
     given: $.properties[?(@.type != 'object')]
     recommended: true
     then:
@@ -15,24 +17,26 @@ rules:
     severity: error
 
   ia-x-href-readOnly:
-    description: "href should always be readOnly."
+    description: href should always be readOnly.
     given: $.properties.href
     recommended: true
     message: "{{error}}"
     then:
       field: readOnly
-      function: "true"
+      function: readOnlyTrue
     severity: error
 
   ia-x-object:
-    description: Only property with type 'object' could have x-object field.
+    description: Only 'object' type property could have the following fields [x-object, x-idempotence]
     given: $.properties[?(@.type != 'object')]
     recommended: true
     then:
-      field: x-object
-      function: falsy
+      - field: x-object
+        function: falsy
+      - field: x-idempotence
+        function: falsy
     severity: error
-  
+
   ia-x-mappedToValues:
     description: Only property with enum could have x-mappedToValues field.
     given: $.properties[?(!@.enum)]
@@ -42,7 +46,15 @@ rules:
       function: falsy
     severity: error
 
+  # *.api.yaml
   oas3-api-servers: off
+
+  # pa/paths/project.s1.api.yaml
+  oas3-valid-media-example: off
+  
+  oas3-valid-oas-content-example: off
+
+  oas3-unused-component: off
 
 except:
 
@@ -60,10 +72,10 @@ except:
   "common/models/metadata.schema.yaml":
     - ia-x-mappedto
     - ia-x-mappedto-root
-  "common/models/objectmodel.schema.yaml":
+  "common/models/object-model.schema.yaml":
     - ia-x-mappedto
     - ia-x-mappedto-root
-  "common/models/objectref.schema.yaml":
+  "common/models/object-reference.schema.yaml":
     - ia-x-mappedto
     - ia-x-mappedto-root
   "common/models/metadatapages.v1.yaml":
@@ -72,4 +84,3 @@ except:
   "common/models/metadataextended.v1.yaml":
     - ia-x-mappedto
     - ia-x-mappedto-root
-
