@@ -13,14 +13,14 @@ properties:
       - company
     default: user
   value:
-    type:
-      oneOf:
-        - string
-        - number
-        - integer
-        - boolean
-        - object
-        - array
+    type: string
+#       oneOf:
+#         - string
+#         - number
+#         - integer
+#         - boolean
+#         - object
+#         - array
     description: Value to store
   href:
     type: string
