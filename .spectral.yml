@@ -1,0 +1,75 @@
+extends: spectral:oas
+
+documentationUrl: https://intacct.atlassian.net/wiki/spaces/~397816204/pages/1369407790/YAML+Schema+for+NextGen+API+Objects
+
+functions: ["true"]
+
+rules:
+  ia-x-mappedto:
+    description: "Primitive property should have x-mappedTo field."
+    given: $.properties[?(@.type != 'object')]
+    recommended: true
+    then:
+      field: x-mappedTo
+      function: truthy
+    severity: error
+
+  ia-x-href-readOnly:
+    description: "href should always be readOnly."
+    given: $.properties.href
+    recommended: true
+    message: "{{error}}"
+    then:
+      field: readOnly
+      function: "true"
+    severity: error
+
+  ia-x-object:
+    description: Only property with type 'object' could have x-object field.
+    given: $.properties[?(@.type != 'object')]
+    recommended: true
+    then:
+      field: x-object
+      function: falsy
+    severity: error
+  
+  ia-x-mappedToValues:
+    description: Only property with enum could have x-mappedToValues field.
+    given: $.properties[?(!@.enum)]
+    recommended: true
+    then:
+      field: x-mappedToValues
+      function: falsy
+    severity: error
+
+  oas3-api-servers: off
+
+except:
+
+  "#/properties/href":
+    - ia-x-mappedto
+  "common/models/query.schema.yaml":
+    - ia-x-mappedto
+    - ia-x-mappedto-root
+  "common/models/view.schema.yaml":
+    - ia-x-mappedto
+    - ia-x-mappedto-root
+  "common/models/key-value-map.s1.schema.yaml":
+    - ia-x-mappedto
+    - ia-x-mappedto-root
+  "common/models/metadata.schema.yaml":
+    - ia-x-mappedto
+    - ia-x-mappedto-root
+  "common/models/objectmodel.schema.yaml":
+    - ia-x-mappedto
+    - ia-x-mappedto-root
+  "common/models/objectref.schema.yaml":
+    - ia-x-mappedto
+    - ia-x-mappedto-root
+  "common/models/metadatapages.v1.yaml":
+    - ia-x-mappedto
+    - ia-x-mappedto-root
+  "common/models/metadataextended.v1.yaml":
+    - ia-x-mappedto
+    - ia-x-mappedto-root
+

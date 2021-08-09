@@ -1,0 +1,40 @@
+openapi: 3.0.0
+info:
+  title: Project Status
+  description: Project Status API
+  version: '1.0'
+  contact:
+    email: coleen.ho@sage.com
+    name: Coleen Ho
+tags:
+  - name: project-status
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/objects/project-status/{key}':
+    parameters:
+      - schema:
+          type: string
+          example: '153'
+        name: key
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      description: desc
+      tags:
+        - project-status
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/project-status'
+        '400':
+          description: Bad Request
+      operationId: get-objects-project-status-key
+components:
+  schemas:
+    project-status:
+      $ref: ../models/project-status.s1.schema.yaml

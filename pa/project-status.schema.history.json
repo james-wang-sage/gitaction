@@ -1,0 +1,11 @@
+{
+    "ia::definition" : {
+        "methodPermissions": {
+          "GET": ["ar/lists/projectstatus/view"],
+          "POST": ["ar/lists/projectstatus/create"],
+          "PATCH": ["ar/lists/projectstatus/edit"],
+          "DELETE": ["ar/lists/projectstatus/delete"]
+        }
+    }, 
+    "s1" : { "hash" : "0", "type" : "rootObject"}
+}

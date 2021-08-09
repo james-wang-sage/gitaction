@@ -1,0 +1,389 @@
+title: project
+x-mappedTo: project
+type: object
+x-idempotence: true
+description: Project
+properties:
+  key:
+    type: string
+    description: Record Key
+    readOnly: true
+    x-mappedTo: RECORDNO
+  id:
+    type: string
+    description: Record Id
+    x-mappedTo: PROJECTID
+    x-mutable: false
+  name:
+    type: string
+    description: Record Id
+    x-mappedTo: NAME
+  description:
+    type: string
+    description: Record Description
+    x-mappedTo: DESCRIPTION
+  currency:
+    type: string
+    description: Record Currency
+    x-mappedTo: CURRENCY
+  category:
+    type: string
+    description: Record Category
+    x-mappedTo: PROJECTCATEGORY
+  projectStatus:
+    $ref: ../../pa/models/project-status.s1.schema.yaml
+  status:
+    $ref: ../../common/models/status.s1.schema.yaml
+  startDate:
+    type: string
+    description: Record Start Date
+    x-mappedTo: BEGINDATE
+    format: date
+  endDate:
+    type: string
+    description: Record End Date
+    x-mappedTo: ENDDATE
+    format: date
+  amounts:
+    type: object
+    title: amounts
+    properties:
+      budgetAmount:
+        type: number
+        description: Record Budget Amount
+        x-mappedTo: BUDGETAMOUNT
+      contractAmount:
+        type: number
+        description: Record Contract Amount
+        x-mappedTo: CONTRACTAMOUNT
+      actualAmount:
+        type: number
+        description: Record Actual Amount
+        x-mappedTo: ACTUALAMOUNT
+  durations:
+    type: object
+    title: durations
+    properties:
+      budgetDuration:
+        type: number
+        description: Record Budget Duration
+        x-mappedTo: BUDGETQTY
+      estimatedDuration:
+        type: number
+        description: Record Estimated Duration
+        x-mappedTo: ESTQTY
+      actualDuration:
+        type: number
+        description: Record Actual Duration
+        x-mappedTo: APPROVEDQTY
+      approvedDuration:
+        type: number
+        description: Record Approved Duration
+        x-mappedTo: APPROVEDQTY
+      remainingDuration:
+        type: number
+        description: Record Remaining Duration
+        x-mappedTo: REMAININGQTY
+  percentComplete:
+    type: number
+    description: Record Percent Complete
+    x-mappedTo: PERCENTCOMPLETE
+  observedPercentComplete:
+    type: number
+    description: Record Observed Percent Complete
+    x-mappedTo: OBSPERCENTCOMPLETE
+  billingType:
+    type: string
+    description: Record Billing Type
+    x-mappedTo: BILLINGTYPE
+  salesOrderId:
+    type: string
+    description: Record Sales Order Id
+    x-mappedTo: SONUMBER
+  purchaseOrderId:
+    type: string
+    description: Record Purchase Order Id
+    x-mappedTo: PONUMBER
+  purchaseOrderAmount:
+    type: string
+    description: Record Purchase Order Amount
+    x-mappedTo: POAMOUNT
+  purchaseQuoteId:
+    type: string
+    description: Record Purchase Quote Id
+    x-mappedTo: PQNUMBER
+  salesforceKey:
+    type: string
+    description: Record Salesforce Key
+    x-mappedTo: SFDCKEY
+  parent:
+    type: object
+    x-object: project
+    x-mappedTo: project
+    title: parentProject
+    properties:
+      key:
+        type: string
+        x-mappedTo: PARENTKEY
+      id:
+        type: string
+        x-mappedTo: PARENTID
+      name:
+        type: string
+        x-mappedTo: PARENTNAME
+    description: Record Parent Project
+  invoiceWithParent:
+    type: boolean
+    description: Record Is Invoiced With Parent
+    x-mappedTo: INVOICEWITHPARENT
+    x-mappedToType: string
+  customer:
+    type: object
+    title: customer
+    x-object: customer
+    properties:
+      key:
+        type: string
+        description: Customer Key
+        x-mappedTo: CUSTOMERKEY
+      id:
+        type: string
+        description: Customer ID
+        x-mappedTo: CUSTOMERID
+      name:
+        type: string
+        description: Customer Name
+        readOnly: true
+        x-mappedTo: CUSTOMERNAME
+      href:
+        type: string
+        readOnly: true
+  salesContact:
+    type: object
+    title: salesContact
+    x-object: employee
+    x-mappedTo: salescontact
+    properties:
+      key:
+        type: string
+        x-mappedTo: SALESCONTACTKEY
+        readOnly: true
+      id:
+        type: string
+        x-mappedTo: SALESCONTACTID
+      name:
+        type: string
+        x-mappedTo: SALESCONTACTNAME
+      href:
+        type: string
+        readOnly: true
+  manager:
+    type: object
+    title: manager
+    x-object: employee
+    x-mappedTo: manager
+    properties:
+      key:
+        type: string
+        x-mappedTo: MANAGERKEY
+        readOnly: true
+      id:
+        type: string
+        x-mappedTo: MANAGERID
+      name:
+        type: string
+        x-mappedTo: MANAGERCONTACTNAME
+      href:
+        type: string
+        readOnly: true
+#  projectType:
+#    $ref: ../../common/models/projecttype.s1.schema.yaml
+  department:
+    title: department
+    type: object
+    x-object: department
+    properties:
+      key:
+        type: string
+        description: Department Key
+        x-mappedTo: PROJECTDEPTKEY
+      id:
+        type: string
+        description: Department
+        x-mappedTo: DEPARTMENTID
+      name:
+        type: string
+        description: Department Name
+        readOnly: true
+        x-mappedTo: DEPARTMENTNAME
+      href:
+        type: string
+        readOnly: true
+  location:
+    title: location
+    type: object
+    x-object: location
+    properties:
+      key:
+        type: string
+        description: Location Key
+        x-mappedTo: PROJECTLOCATIONKEY
+      id:
+        type: string
+        description: Location
+        x-mappedTo: LOCATIONID
+      name:
+        type: string
+        description: Location Name
+        readOnly: true
+        x-mappedTo: LOCATIONNAME
+      href:
+        type: string
+        readOnly: true
+#  term:
+#    $ref: ../../common/models/termref.s1.schema.yaml
+  referenceId:
+    type: string
+    description: Record Reference Id
+    x-mappedTo: DOCNUMBER
+#  externalCustomer:
+#    $ref: ../../common/models/userinforef.s1.schema.yaml
+  budgetedCost:
+    type: number
+    description: Record Budgeted Cost
+    x-mappedTo: BUDGETEDCOST
+  class:
+    $ref: ../../common/references/classref.s1.schema.yaml
+  userRestrictions:
+    type: string
+    description: Record User Restrictions
+    x-mappedTo: USERRESTRICTIONS
+  billAsEmployeeExpense:
+    type: boolean
+    description: Record Is Employee Expense Billable
+    x-mappedTo: BILLABLEEXPDEFAULT
+    x-mappedToType: string
+  isAccountsPayableOrPurchaseOrderBillable:
+    type: string
+    description: Record Is Accounts Payable Or Purchase Order Billable
+    x-mappedTo: BILLABLEAPPODEFAULT
+    x-mappedToType: string
+#  budget:
+#    $ref: ../../common/models/budgetref.s1.schema.yaml
+  billingRate:
+    type: number
+    description: Record Billing Rate
+    x-mappedTo: BILLINGRATE
+  billingPricing:
+    type: string
+    description: Record Billing Pricing
+    x-mappedTo: BILLINGPRICING
+  expenseRate:
+    type: string
+    description: Record Expense Rate
+    x-mappedTo: EXPENSERATE
+  expensePricing:
+    type: string
+    description: Record Expense Pricing
+    x-mappedTo: EXPENSEPRICING
+  rateForAPOrPurchasing:
+    type: number
+    description: Record Rate For Accounts Payable Or Purchse Order
+    x-mappedTo: POAPRATE
+  pricingOptionForAccountsPayableOrPurchaseOrder:
+    type: string
+    description: Record Pricing Option For Accounts Payable Or Purchse Order
+    x-mappedTo: POAPPRICING
+  contacts:
+    type: object
+    title: contacts
+    properties:
+      primary:
+        type: object
+        title: primary
+        x-object: contact
+        x-mappedTo: contactinfo
+        properties:
+          key:
+            type: string
+            x-mappedTo: CONTACTKEY
+            readOnly: true
+          id:
+            type: string
+            x-mappedTo: CONTACTINFO.CONTACTNAME
+          href:
+            type: string
+            readOnly: true
+      shipTo:
+        type: object
+        title: shipTo
+        x-object: contact
+        x-mappedTo: shipto
+        properties:
+          key:
+            type: string
+            x-mappedTo: SHIPTOKEY
+            readOnly: true
+          id:
+            type: string
+            x-mappedTo: SHIPTO.CONTACTNAME
+          href:
+            type: string
+            readOnly: true
+      billTo:
+        type: object
+        title: billTo
+        x-object: contact
+        x-mappedTo: billto
+        properties:
+          key:
+            type: string
+            x-mappedTo: BILLTOKEY
+            readOnly: true
+          id:
+            type: string
+            x-mappedTo: BILLTO.CONTACTNAME
+          href:
+            type: string
+            readOnly: true
+  invoiceMessage:
+    type: string
+    description: Record Invoice Message
+    x-mappedTo: INVOICEMESSAGE
+  invoiceCurrency:
+    type: string
+    description: Record Invoice Currency
+    x-mappedTo: INVOICECURRENCY
+  billingAmountOverMax:
+    type: string
+    description: Record Billing Amount Over Budget Billing Amount
+    x-mappedTo: BILLINGOVERMAX
+  excludeExpense:
+    type: boolean
+    description: Record Is Expense Excluded
+    x-mappedTo: EXCLUDEEXPENSES
+    x-mappedToType: string
+#  contract:
+#    $ref: ../../common/models/contractref.s1.schema.yaml
+  attachmentId:
+    type: string
+    description: Record Attachment Id
+    x-mappedTo: SUPDOCID
+  audit:
+    $ref: ../../common/models/audit.s1.schema.yaml
+  root:
+    type: object
+    x-object: project
+    x-mappedTo: project
+    title: parentProject
+    properties:
+      key:
+        type: string
+        x-mappedTo: ROOTPARENTKEY
+      id:
+        type: string
+        x-mappedTo: ROOTPARENTID
+      name:
+        type: string
+        x-mappedTo: ROOTPARENTNAME
+    description: Record Root Project

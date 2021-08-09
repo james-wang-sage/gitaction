@@ -1,0 +1,24 @@
+# Makefile
+
+ifndef SANDBOX
+	# SANDBOX is the parent of /app
+	SANDBOX = ../../../..
+endif
+
+ifndef TOOLSLOC
+	TOOLSLOC = $(SANDBOX)/app/tools
+endif
+
+YAML_CONVERTER = $(TOOLSLOC)/eng/yaml_converter.bin
+REGISTRY_BUILDER = $(TOOLSLOC)/eng/build_temp_registry.bin
+
+all: convert_to_json update_v0_registry
+
+convert_to_json:
+	@$(YAML_CONVERTER)
+
+update_v0_registry:
+	@$(REGISTRY_BUILDER)
+
+mapval:
+	@$(YAML_CONVERTER) mapval
