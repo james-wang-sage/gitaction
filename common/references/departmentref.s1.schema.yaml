@@ -1,0 +1,19 @@
+title: departmentref
+type: object
+x-object: department
+properties:
+  key:
+    type: integer
+    description: Department Key
+    x-mappedTo: DEPARTMENTKEY
+  id:
+    type: string
+    description: Department
+    x-mappedTo: DEPARTMENT
+  name:
+    type: string
+    description: Department Name
+    readOnly: true
+    x-mappedTo: DEPARTMENTTITLE
+x-tags:
+  - reference

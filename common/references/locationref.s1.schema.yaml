@@ -1,0 +1,19 @@
+title: locationref
+type: object
+x-object: location
+properties:
+  key:
+    type: integer
+    description: Location Key
+    x-mappedTo: LOCATIONKEY
+  id:
+    type: integer
+    description: Location
+    x-mappedTo: LOCATION
+  name:
+    type: string
+    description: Location Name
+    readOnly: true
+    x-mappedTo: LOCATIONNAME
+x-tags:
+  - reference

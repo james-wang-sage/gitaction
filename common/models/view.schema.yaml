@@ -1,0 +1,55 @@
+title: view
+description: View
+type: object
+properties:
+  key:
+    type: string
+    description: Key to identify the view
+  viewType:
+    type: string
+    description: Specify the type of view to execute
+    enum:
+      - user
+      - system
+  filterParameters:
+    anyOf:
+      - properties:
+          asOfDate:
+            type: string
+            description: |-
+              This date will determine the values for date macros used in filters. 
+              Example if asOfDate is set to "2021-03-05" then date macro "Prior Month" will be "02"
+              Supported date macros in filter comparison are
+                - today
+                - yesterday
+                - currentWeek
+                - lastWeek
+                - currentMonth
+                - priorMonth
+                - currentQuarter
+                - priorQuarter
+                - currentYear
+                - priorYear
+            example: today
+          caseSensitiveComparison:
+            type: boolean
+    type: object
+  orderBy:
+    type: array
+    items:
+      type: object
+      properties:
+        fieldName:
+          type: string
+          enum:
+            - asc
+            - desc
+  start:
+    type: string
+    description: Start Page
+  size:
+    type: string
+    description: Page size
+required:
+  - key
+  - viewType

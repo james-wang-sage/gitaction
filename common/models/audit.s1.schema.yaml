@@ -1,0 +1,30 @@
+type: object
+title: audit
+properties:
+  createdDateTime:
+    description: Time of the submission
+    type: string
+    format: date-time
+    example: 2014-01-08T11:28:12Z
+    x-mappedTo: WHENCREATED
+    readOnly: true
+  modifiedDateTime:
+    description: Time of the modification
+    type: string
+    format: date-time
+    example: 2014-01-08T11:28:12Z
+    x-mappedTo: WHENMODIFIED
+    readOnly: true
+  createdBy:
+    description: User who created this
+    type: integer
+    example: 1
+    x-mappedTo: CREATEDBY
+    readOnly: true
+  modifiedBy:
+    description: User who modified this
+    type: integer
+    example: 95
+    x-mappedTo: MODIFIEDBY
+    readOnly: true
+readOnly: true

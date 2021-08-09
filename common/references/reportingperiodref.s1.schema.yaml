@@ -1,0 +1,19 @@
+title: reportingperiodref
+type: object
+x-object: reportingperiod
+x-mappedTo: reportingperiod
+properties:
+  key:
+    type: string
+    description: Record Key
+    x-mappedTo: PERIODKEY
+  id:
+    type: string
+    description: Record ID
+    x-mappedTo: PERIODNAME
+  name:
+    type: string
+    description: Record Name
+    x-mappedTo: PERIODNAME
+x-tags:
+  - reference

@@ -1,0 +1,17 @@
+title: customerref
+type: object
+x-object: customer
+properties:
+  key:
+    type: integer
+    description: Customer Key
+    x-mappedTo: CUSTOMERDIMKEY
+  id:
+    type: string
+    description: Customer ID
+    x-mappedTo: CUSTOMERID
+  name:
+    type: string
+    description: Customer Name
+    readOnly: true
+    x-mappedTo: CUSTOMERNAME

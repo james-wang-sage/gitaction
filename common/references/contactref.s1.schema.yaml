@@ -1,0 +1,107 @@
+title: contact
+type: object
+x-object: contact
+x-mappedTo: contact
+properties:
+  key:
+    type: string
+    description: Contact Key
+    readOnly: true
+    x-mappedTo: $$key
+  id:
+    type: string
+    description: Contact ID
+    x-mappedTo: $$prefix.CONTACTNAME
+  href:
+    type: string
+    readOnly: true
+  lastName:
+    type: string
+    description: Last Name
+    x-mappedTo: $$prefix.LASTNAME
+  firstName:
+    type: string
+    description: First Name
+    x-mappedTo: $$prefix.FIRSTNAME
+  middleName:
+    type: string
+    description: Middle Name
+    x-mappedTo: $$prefix.INITIAL
+  prefix:
+    type: string
+    description: Prefix
+    x-mappedTo: $$prefix.PREFIX
+  printAs:
+    type: string
+    description: Print As
+    x-mappedTo: $$prefix.PRINTAS
+  email1:
+    type: string
+    description: Primary Email
+    x-mappedTo: $$prefix.EMAIL1
+  email2:
+    type: string
+    description: Secondary Email
+    x-mappedTo: $$prefix.EMAIL2
+  phone1:
+    type: string
+    description: Primary Phone
+    x-mappedTo: $$prefix.PHONE1
+  phone2:
+    type: string
+    description: Secondary Phone
+    x-mappedTo: $$prefix.PHONE2
+  mobile:
+    type: string
+    description: Mobile
+    x-mappedTo: $$prefix.CELLPHONE
+  pager:
+    type: string
+    description: Pager
+    x-mappedTo: $$prefix.PAGER
+  fax:
+    type: string
+    description: Fax
+    x-mappedTo: $$prefix.FAX
+  URL1:
+    type: string
+    description: Primary URL
+    x-mappedTo: $$prefix.URL1
+  URL2:
+    type: string
+    description: Secondary URL
+    x-mappedTo: $$prefix.URL2
+  companyName:
+    type: string
+    description: Company Name
+    x-mappedTo: $$prefix.COMPANYNAME
+  mailingAddress:
+    type: object
+    description: Mailing Address
+    properties:
+      addressLine1:
+        type: string
+        description: Addess 1
+        x-mappedTo: $$prefix.MAILADDRESS.ADDRESS1
+      addressLine2:
+        type: string
+        description: Addess 2
+        x-mappedTo: $$prefix.MAILADDRESS.ADDRESS2
+      city:
+        type: string
+        description: City
+        x-mappedTo: $$prefix.MAILADDRESS.CITY
+      state:
+        type: string
+        description: State
+        x-mappedTo: $$prefix.MAILADDRESS.STATE
+      postCode:
+        type: string
+        description: Zip or Postal Code
+        x-mappedTo: $$prefix.MAILADDRESS.ZIP
+      country:
+        type: string
+        description: Country
+        x-mappedTo: $$prefix.MAILADDRESS.COUNTRY
+x-tags:
+  - reference

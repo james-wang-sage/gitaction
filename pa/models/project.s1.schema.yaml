@@ -4,11 +4,16 @@ type: object
 x-idempotence: true
 description: Project
 properties:
+  href:
+    type: string
+    # readOnly: true
   key:
     type: string
     description: Record Key
     readOnly: true
-    x-mappedTo: RECORDNO
+    # x-mappedTo: RECORDNO
+    x-object: customer
+    x-idempotence: true
   id:
     type: string
     description: Record Id
@@ -157,7 +162,7 @@ properties:
         x-mappedTo: CUSTOMERNAME
       href:
         type: string
-        readOnly: true
+        # readOnly: true
   salesContact:
     type: object
     title: salesContact

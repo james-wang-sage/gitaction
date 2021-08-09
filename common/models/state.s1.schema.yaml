@@ -1,0 +1,22 @@
+type: string
+enum:
+  - draft
+  - submitted
+  - partiallyApproved
+  - approved
+  - posted
+  - declined
+  - reversalPending
+  - reversed
+x-mappedToValues:
+  - Draft
+  - Submitted
+  - Partially Approved
+  - Approved
+  - Posted
+  - Declined
+  - Reversal pending
+  - Reversed
+default: posted
+description: State to update the entry to. Posted to post to the GL
+x-mappedTo: STATE

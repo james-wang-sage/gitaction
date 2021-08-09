@@ -1,0 +1,26 @@
+title: metadata with pagination
+description: Meta data for collection response
+allOf:
+  - $ref: ./metadata.schema.yaml
+  - type: object
+    properties:
+      start:
+        type: integer
+        description: Start Page Number
+        x-mappedTo: null
+        readOnly: true
+      pageSize:
+        type: integer
+        description: Page Size
+        x-mappedTo: null
+        readOnly: true
+      next:
+        type: integer
+        description: Next Page Number
+        x-mappedTo: null
+        readOnly: true
+      previous:
+        type: integer
+        description: Previous Page Number
+        x-mappedTo: null
+        readOnly: true

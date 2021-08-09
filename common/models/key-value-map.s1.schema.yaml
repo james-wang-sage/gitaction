@@ -1,0 +1,27 @@
+title: key-value-map
+description: key-value-map
+type: object
+properties:
+  key:
+    type: string
+    description: Key to identify the map
+  type:
+    type: string
+    description: Key type
+    enum:
+      - user
+      - company
+    default: user
+  value:
+    type:
+      - string
+      - number
+      - integer
+      - boolean
+      - object
+      - array
+    description: Value to store
+  href:
+    type: string
+    readOnly: true
+   

@@ -1,0 +1,18 @@
+title: accountref
+type: object
+x-object: account
+properties:
+  key:
+    type: integer
+    description: GL Account Key
+    x-mappedTo: ACCOUNTKEY
+  id:
+    type: string
+    description: GL Account ID
+    x-mappedTo: ACCOUNTNO
+  name:
+    type: string
+    description: GL Account Title
+    x-mappedTo: ACCOUNTTITLE
+x-tags:
+  - reference

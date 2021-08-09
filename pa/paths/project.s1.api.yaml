@@ -6,10 +6,10 @@ info:
   contact:
     email: tim.miller@sage.com
     name: Tim Miller
+# servers:
+#   - url: 'http://localhost:3000'
 tags:
   - name: project
-servers:
-  - url: 'http://localhost:3000'
 paths:
   '/objects/project/{key}':
     parameters:
@@ -385,4 +385,11 @@ components:
         application/json:
           schema:
             $ref: ../../common/models/error-response.schema.yaml
-
+  parameters:
+    jobId:
+      name: jobId
+      in: path
+      schema:
+        type: string
+        pattern: '^[A-Za-z0-9]'
+      required: true
