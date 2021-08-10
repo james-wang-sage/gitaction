@@ -5,10 +5,11 @@ x-idempotence: true
 description: Project
 properties:
   key:
-    type: string
+    type: any
     description: Record Key
     readOnly: true
     x-mappedTo: RECORDNO
+    # x-idempotence: true
   id:
     type: string
     description: Record Id
