@@ -5,19 +5,7 @@ x-idempotence: true
 description: Project
 properties:
   key:
-    # type:
-    #   - string
-    #   - number
-    #   - object
-    #   - integer
-    #   - boolean
-    type:
-      oneOf:
-        - type: string
-        - type: number
-        - type: object
-        - type: integer
-        - type: boolean
+    type: any
     description: Record Key
     readOnly: true
     x-mappedTo: RECORDNO
