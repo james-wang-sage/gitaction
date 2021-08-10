@@ -11,6 +11,13 @@ properties:
     #   - object
     #   - integer
     #   - boolean
+    type:
+      oneOf:
+        - type: string
+        - type: number
+        - type: object
+        - type: integer
+        - type: boolean
     description: Record Key
     readOnly: true
     x-mappedTo: RECORDNO
