@@ -8,8 +8,8 @@ properties:
     type: any
     description: Record Key
     readOnly: true
-    x-mappedTo: RECORDNO
-    # x-idempotence: true
+    # x-mappedTo: RECORDNO
+    x-idempotence: true
   id:
     type: string
     description: Record Id
