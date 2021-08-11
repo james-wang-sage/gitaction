@@ -406,3 +406,13 @@ properties:
         type: string
         x-mappedTo: ROOTPARENTNAME
     description: Record Root Project
+  value:
+    oneOf:
+      - type: string
+      - type: number
+      - type: integer
+      - type: boolean
+      - type: object
+      - type: array
+    description: Can be any value - string, number, boolean, array or object.
+    x-mappedTo: value
