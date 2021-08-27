@@ -1,91 +1,94 @@
-# formats:
-#   - oas3.1
-#   - oas3.0
-#   - oas3
-
+format:
+  - oas3.0
 extends:
-  - spectral:oas
-
-documentationUrl: https://intacct.atlassian.net/wiki/spaces/~397816204/pages/1369407790/YAML+Schema+for+NextGen+API+Objects
-
+  - 'spectral:oas'
+documentationUrl: 'https://intacct.atlassian.net/wiki/spaces/~397816204/pages/1369407790/YAML+Schema+for+NextGen+API+Objects'
 functions:
   - readOnlyTrue
-
 rules:
+  ia-examples:
+    description: Request and response should have examples.
+    given:
+      - $.paths[*][*]..content[*]
+    type: validation
+    recommended: true
+    then:
+      - field: examples
+        function: truthy
+    severity: error
+  ia-paths-operation-summary:
+    description: Operation must have summary.
+    given: '$.paths[*][?( @property === ''get'' || @property === ''put'' || @property === ''post'' || @property === ''delete'' || @property === ''options'' || @property === ''head'' || @property === ''patch'' || @property === ''trace'' )]'
+    type: validation
+    recommended: true
+    then:
+      - field: summary
+        function: truthy
+    severity: error
   ia-x-mappedto:
     description: Primitive property should have x-mappedTo field.
-    given: $.properties[?(@.type != 'object')]
+    given: '$.properties[?(@.type != ''object'')]'
     recommended: true
     then:
       field: x-mappedTo
       function: truthy
     severity: error
-
   ia-x-href-readOnly:
     description: href should always be readOnly.
     given: $.properties.href
     recommended: true
-    message: "{{error}}"
+    message: '{{error}}'
     then:
       field: readOnly
       function: readOnlyTrue
     severity: error
-
   ia-x-object:
-    description: Only 'object' type property could have the following fields [x-object, x-idempotence]
-    given: $.properties[?(@.type != 'object')]
-    recommended: true
+    description: 'Only ''object'' type property could have the following fields [x-object, x-idempotence]'
+    given: '$..[?(@property === ''x-object'' || @property === ''x-idempotence'')]^'
     then:
-      - field: x-object
-        function: falsy
-      - field: x-idempotence
-        function: falsy
+      field: type
+      function: pattern
+      functionOptions:
+        match: object
+    recommended: true
     severity: error
-
   ia-x-mappedToValues:
     description: Only property with enum could have x-mappedToValues field.
-    given: $.properties[?(!@.enum)]
+    given: '$.properties[?(!@.enum)]'
     recommended: true
     then:
       field: x-mappedToValues
       function: falsy
     severity: error
-
-  # *.api.yaml
-  oas3-api-servers: off
-
-  # pa/paths/project.s1.api.yaml
-  oas3-valid-media-example: off
-  
-  oas3-valid-oas-content-example: off
-
-  oas3-unused-component: off
-
+  oas3-api-servers: 'off'
+  oas3-valid-media-example: 'off'
+  oas3-valid-oas-content-example: 'off'
+  oas3-unused-component: 'off'
+  info-description: error
+  tag-description: error
+  operation-description: error
+  operation-tags: error
 except:
-
-  "#/properties/href":
+  '#/properties/href':
     - ia-x-mappedto
-  "common/models/query.schema.yaml":
-    - ia-x-mappedto
-    - ia-x-mappedto-root
-  "common/models/view.schema.yaml":
+  common/models/query.schema.yaml:
     - ia-x-mappedto
     - ia-x-mappedto-root
-  "common/models/key-value-map.s1.schema.yaml":
+  common/models/view.schema.yaml:
     - ia-x-mappedto
     - ia-x-mappedto-root
-  "common/models/metadata.schema.yaml":
+  common/models/metadata.schema.yaml:
     - ia-x-mappedto
     - ia-x-mappedto-root
-  "common/models/object-model.schema.yaml":
+  common/models/object-model.schema.yaml:
     - ia-x-mappedto
     - ia-x-mappedto-root
-  "common/models/object-reference.schema.yaml":
+  common/models/object-reference.schema.yaml:
     - ia-x-mappedto
     - ia-x-mappedto-root
-  "common/models/metadatapages.v1.yaml":
+  common/models/metadata-pages.v1.yaml:
     - ia-x-mappedto
     - ia-x-mappedto-root
-  "common/models/metadataextended.v1.yaml":
+  common/models/metadata-extended.v1.yaml:
     - ia-x-mappedto
     - ia-x-mappedto-root
