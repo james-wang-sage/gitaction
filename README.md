@@ -1,3 +1,2 @@
 # NextGen API OAS
 #
-#
