@@ -6,16 +6,6 @@ documentationUrl: 'https://intacct.atlassian.net/wiki/spaces/~397816204/pages/13
 functions:
   - readOnlyTrue
 rules:
-  ia-examples:
-    description: Request and response should have examples.
-    given:
-      - $.paths[*][*]..content[*]
-    type: validation
-    recommended: true
-    then:
-      - field: examples
-        function: truthy
-    severity: error
   ia-paths-operation-summary:
     description: Operation must have summary.
     given: '$.paths[*][?( @property === ''get'' || @property === ''put'' || @property === ''post'' || @property === ''delete'' || @property === ''options'' || @property === ''head'' || @property === ''patch'' || @property === ''trace'' )]'
